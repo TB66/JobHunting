@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tanben.jobhunting.dao1.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.tanben.jobhunting.bean1.Company">
+    <id column="pk_company" jdbcType="INTEGER" property="pkCompany" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="website" jdbcType="VARCHAR" property="website" />
+    <result column="contactmail" jdbcType="VARCHAR" property="contactmail" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="comdescription" jdbcType="VARCHAR" property="comdescription" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="employee" jdbcType="VARCHAR" property="employee" />
+    <result column="jobposition" jdbcType="VARCHAR" property="jobposition" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="categories" jdbcType="VARCHAR" property="categories" />
+    <result column="admin" jdbcType="VARCHAR" property="admin" />
+    <result column="changetime" jdbcType="TIMESTAMP" property="changetime" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+    <result column="dr" jdbcType="INTEGER" property="dr" />
+    <result column="def1" jdbcType="VARCHAR" property="def1" />
+    <result column="def2" jdbcType="VARCHAR" property="def2" />
+    <result column="def3" jdbcType="VARCHAR" property="def3" />
+    <result column="def4" jdbcType="VARCHAR" property="def4" />
+    <result column="def5" jdbcType="VARCHAR" property="def5" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pk_company, name, image, email, phone, website, contactmail, size, comdescription, 
+    address, employee, jobposition, images, categories, admin, changetime, ts, dr, def1, 
+    def2, def3, def4, def5
+  </sql>
+  <select id="selectByExample" parameterType="com.tanben.jobhunting.bean1.CompanyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from company
+    where pk_company = #{pkCompany,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from company
+    where pk_company = #{pkCompany,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tanben.jobhunting.bean1.CompanyExample">
+    delete from company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tanben.jobhunting.bean1.Company">
+    insert into company (pk_company, name, image, 
+      email, phone, website, 
+      contactmail, size, comdescription, 
+      address, employee, jobposition, 
+      images, categories, admin, 
+      changetime, ts, dr, 
+      def1, def2, def3, def4, 
+      def5)
+    values (#{pkCompany,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
+      #{contactmail,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, #{comdescription,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{employee,jdbcType=VARCHAR}, #{jobposition,jdbcType=VARCHAR}, 
+      #{images,jdbcType=VARCHAR}, #{categories,jdbcType=VARCHAR}, #{admin,jdbcType=VARCHAR}, 
+      #{changetime,jdbcType=TIMESTAMP}, #{ts,jdbcType=TIMESTAMP}, #{dr,jdbcType=INTEGER}, 
+      #{def1,jdbcType=VARCHAR}, #{def2,jdbcType=VARCHAR}, #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR}, 
+      #{def5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tanben.jobhunting.bean1.Company">
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkCompany != null">
+        pk_company,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="website != null">
+        website,
+      </if>
+      <if test="contactmail != null">
+        contactmail,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="comdescription != null">
+        comdescription,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="employee != null">
+        employee,
+      </if>
+      <if test="jobposition != null">
+        jobposition,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+      <if test="categories != null">
+        categories,
+      </if>
+      <if test="admin != null">
+        admin,
+      </if>
+      <if test="changetime != null">
+        changetime,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+      <if test="dr != null">
+        dr,
+      </if>
+      <if test="def1 != null">
+        def1,
+      </if>
+      <if test="def2 != null">
+        def2,
+      </if>
+      <if test="def3 != null">
+        def3,
+      </if>
+      <if test="def4 != null">
+        def4,
+      </if>
+      <if test="def5 != null">
+        def5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkCompany != null">
+        #{pkCompany,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="contactmail != null">
+        #{contactmail,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="comdescription != null">
+        #{comdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="employee != null">
+        #{employee,jdbcType=VARCHAR},
+      </if>
+      <if test="jobposition != null">
+        #{jobposition,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="categories != null">
+        #{categories,jdbcType=VARCHAR},
+      </if>
+      <if test="admin != null">
+        #{admin,jdbcType=VARCHAR},
+      </if>
+      <if test="changetime != null">
+        #{changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=INTEGER},
+      </if>
+      <if test="def1 != null">
+        #{def1,jdbcType=VARCHAR},
+      </if>
+      <if test="def2 != null">
+        #{def2,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="def4 != null">
+        #{def4,jdbcType=VARCHAR},
+      </if>
+      <if test="def5 != null">
+        #{def5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tanben.jobhunting.bean1.CompanyExample" resultType="java.lang.Long">
+    select count(*) from company
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update company
+    <set>
+      <if test="record.pkCompany != null">
+        pk_company = #{record.pkCompany,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.website != null">
+        website = #{record.website,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactmail != null">
+        contactmail = #{record.contactmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comdescription != null">
+        comdescription = #{record.comdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employee != null">
+        employee = #{record.employee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobposition != null">
+        jobposition = #{record.jobposition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.images != null">
+        images = #{record.images,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categories != null">
+        categories = #{record.categories,jdbcType=VARCHAR},
+      </if>
+      <if test="record.admin != null">
+        admin = #{record.admin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changetime != null">
+        changetime = #{record.changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ts != null">
+        ts = #{record.ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dr != null">
+        dr = #{record.dr,jdbcType=INTEGER},
+      </if>
+      <if test="record.def1 != null">
+        def1 = #{record.def1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.def2 != null">
+        def2 = #{record.def2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.def3 != null">
+        def3 = #{record.def3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.def4 != null">
+        def4 = #{record.def4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.def5 != null">
+        def5 = #{record.def5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update company
+    set pk_company = #{record.pkCompany,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      website = #{record.website,jdbcType=VARCHAR},
+      contactmail = #{record.contactmail,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      comdescription = #{record.comdescription,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      employee = #{record.employee,jdbcType=VARCHAR},
+      jobposition = #{record.jobposition,jdbcType=VARCHAR},
+      images = #{record.images,jdbcType=VARCHAR},
+      categories = #{record.categories,jdbcType=VARCHAR},
+      admin = #{record.admin,jdbcType=VARCHAR},
+      changetime = #{record.changetime,jdbcType=TIMESTAMP},
+      ts = #{record.ts,jdbcType=TIMESTAMP},
+      dr = #{record.dr,jdbcType=INTEGER},
+      def1 = #{record.def1,jdbcType=VARCHAR},
+      def2 = #{record.def2,jdbcType=VARCHAR},
+      def3 = #{record.def3,jdbcType=VARCHAR},
+      def4 = #{record.def4,jdbcType=VARCHAR},
+      def5 = #{record.def5,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tanben.jobhunting.bean1.Company">
+    update company
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="contactmail != null">
+        contactmail = #{contactmail,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="comdescription != null">
+        comdescription = #{comdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="employee != null">
+        employee = #{employee,jdbcType=VARCHAR},
+      </if>
+      <if test="jobposition != null">
+        jobposition = #{jobposition,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="categories != null">
+        categories = #{categories,jdbcType=VARCHAR},
+      </if>
+      <if test="admin != null">
+        admin = #{admin,jdbcType=VARCHAR},
+      </if>
+      <if test="changetime != null">
+        changetime = #{changetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dr != null">
+        dr = #{dr,jdbcType=INTEGER},
+      </if>
+      <if test="def1 != null">
+        def1 = #{def1,jdbcType=VARCHAR},
+      </if>
+      <if test="def2 != null">
+        def2 = #{def2,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        def3 = #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="def4 != null">
+        def4 = #{def4,jdbcType=VARCHAR},
+      </if>
+      <if test="def5 != null">
+        def5 = #{def5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pk_company = #{pkCompany,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tanben.jobhunting.bean1.Company">
+    update company
+    set name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      contactmail = #{contactmail,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      comdescription = #{comdescription,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      employee = #{employee,jdbcType=VARCHAR},
+      jobposition = #{jobposition,jdbcType=VARCHAR},
+      images = #{images,jdbcType=VARCHAR},
+      categories = #{categories,jdbcType=VARCHAR},
+      admin = #{admin,jdbcType=VARCHAR},
+      changetime = #{changetime,jdbcType=TIMESTAMP},
+      ts = #{ts,jdbcType=TIMESTAMP},
+      dr = #{dr,jdbcType=INTEGER},
+      def1 = #{def1,jdbcType=VARCHAR},
+      def2 = #{def2,jdbcType=VARCHAR},
+      def3 = #{def3,jdbcType=VARCHAR},
+      def4 = #{def4,jdbcType=VARCHAR},
+      def5 = #{def5,jdbcType=VARCHAR}
+    where pk_company = #{pkCompany,jdbcType=INTEGER}
+  </update>
+</mapper>

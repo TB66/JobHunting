@@ -1,0 +1,20 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: jobhunting
+  cache:
+    type: redis
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1/parttimesys?serverTimezone=UTC&CharacterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 1qaz@WSX
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
